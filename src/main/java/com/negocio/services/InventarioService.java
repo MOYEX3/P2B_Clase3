@@ -19,11 +19,11 @@ public class InventarioService {
         productos.add(new Producto(4, "Refresco", 3.50, 50));
     }
 
-    // ERROR 8: Bucle infinito potencial
+    // ERROR 8: Bucle infinito potencial(check)
     public Producto buscarProductoPorId(int id) {
         int i = 0;
-        while (i <= productos.size()) { // Debería ser < en lugar de <=
-            if (productos.get(i).id == id) {
+        while (i < productos.size()) { // Debería ser < en lugar de <= porque exede los limites
+            if (productos.get(i).getId() == id) {
                 return productos.get(i);
             }
             i++;
@@ -31,12 +31,12 @@ public class InventarioService {
         return null;
     }
 
-    // ERROR 9: No actualiza el stock después de la venta
+    // ERROR 9: No actualiza el stock después de la venta (check)
     public boolean venderProducto(int id, int cantidad) {
         Producto producto = buscarProductoPorId(id);
         if (producto != null && producto.hayStock(cantidad)) {
-            // No reduce el stock - ERROR LÓGICO
-            System.out.println("Venta realizada: " + producto.nombre);
+            producto.reducirStock(cantidad);   // No reduce el stock - ERROR LÓGICO (check)
+            System.out.println("Venta realizada: " + producto.getNombre());
             return true;
         }
         return false;
@@ -46,7 +46,7 @@ public class InventarioService {
     public List<Producto> obtenerProductosDisponibles() {
         List<Producto> disponibles = new ArrayList<>();
         for (Producto producto : productos) {
-            if (producto.stock >= 0) { // Debería ser > 0
+            if (producto.getStock() > 0) { // Debería ser > 0 (check)
                 disponibles.add(producto);
             }
         }
