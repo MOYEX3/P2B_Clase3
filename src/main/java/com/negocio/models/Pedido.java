@@ -31,7 +31,7 @@ public class Pedido {
 
         total = 0;
         for (Producto producto : productos) {
-            total = producto.getPrecio() * producto.getCantidad() ; // Suma solo el precio, no considera cantidad(check)
+            total += producto.getPrecio() * producto.getCantidad() ; // Suma solo el precio, no considera cantidad(check)
 
         }
 

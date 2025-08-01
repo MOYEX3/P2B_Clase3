@@ -98,9 +98,9 @@ public class Main {
         System.out.print("ID del producto: ");
         int productoId = scanner.nextInt();
         System.out.print("Cantidad: ");
-        int cantidad = scanner.nextInt();
+        int setCantidad = scanner.nextInt();
 
-        if (pedidoService.agregarProductoAPedido(pedidoId, productoId, cantidad)) {
+        if (pedidoService.agregarProductoAPedido(pedidoId, productoId, setCantidad)) {
             System.out.println("Producto agregado exitosamente");
         } else {
             System.out.println("Error al agregar producto");

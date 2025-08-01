@@ -37,10 +37,24 @@ public class PedidoService {
 
 
         // Bucle innecesario con condición incorrecta
-       for (int i = 0; i < cantidad; i++) { // Debería ser < en lugar de !=
+//       for (int i = 0; i < cantidad; i++) { // Debería ser < en lugar de !=
+//            if (inventarioService.venderProducto(productoId, 1)) {
+//                pedido.agregarProducto(producto);
+//                //
+//            } else {
+//                return false;
+//            }
+//        }
+        for (int i = 0; i < cantidad; i++) {
             if (inventarioService.venderProducto(productoId, 1)) {
-                pedido.agregarProducto(producto);
-                //
+                Producto productoPedido = new Producto(
+                        producto.getId(),
+                        producto.getNombre(),
+                        producto.getPrecio(),
+                        0 // el stock ya no importa aquí
+                );
+                productoPedido.setCantidad(1);
+                pedido.agregarProducto(productoPedido);
             } else {
                 return false;
             }
