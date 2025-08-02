@@ -1,8 +1,12 @@
 package com.negocio.services;
 
 import com.negocio.models.Producto;
+
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class InventarioService {
     private List<Producto> productos;
@@ -51,6 +55,36 @@ public class InventarioService {
             }
         }
         return disponibles;
+    }
+
+    public void  ResumenInventario(){
+        System.out.println("inventario");
+        for (Producto producto : productos){
+            System.out.println("ID :"+ producto.getId() +
+                    "nombre: " + producto.getNombre()+
+                    "precio Q"+ producto.getPrecio()+
+                    "stock: "+ producto.getStock());
+        }
+
+    }
+    public boolean eliminarProductoPorId(int id, Scanner scanner) {
+        for (Producto producto : productos) {
+            if (producto.getId() == id) {
+                System.out.println("¿Estás seguro que deseas eliminar el producto '" + producto.getNombre() + "'? (s/n)");
+                String confirmacion = scanner.next().toLowerCase();
+
+                if (confirmacion.toUpperCase().equals("S")) {
+                    productos.remove(producto);
+                    System.out.println("Producto eliminado: " + producto.getNombre());
+                    return true;
+                } else {
+                    System.out.println("Eliminación cancelada.");
+                    return false;
+                }
+            }
+        }
+        System.out.println("No se encontró un producto con ID: " + id);
+        return false;
     }
 
     public List<Producto> obtenerTodosLosProductos() {

@@ -22,6 +22,7 @@ public class Main {
         pedidoService = new PedidoService(inventarioService);
         scanner = new Scanner(System.in);
 
+
         // Menú principal
         boolean continuar = true;
         while (continuar) {
@@ -48,9 +49,20 @@ public class Main {
                 case 6:
                     aplicarDescuentoAPedido();
                     break;
+
                 case 7:
+                    inventarioService.ResumenInventario();
+                    break;
+                case 8:
+                    System.out.print("Ingresa el ID del producto a eliminar: ");
+                    int idEliminar = scanner.nextInt();
+                    inventarioService.eliminarProductoPorId(idEliminar, scanner);
+                    break;
+                case 9:
                     continuar = false;
                     break;
+
+
                 default:
                     System.out.println("Opción inválida");
             }
@@ -69,7 +81,9 @@ public class Main {
         System.out.println("4. Ver pedidos");
         System.out.println("5. Ver ingresos totales");
         System.out.println("6. Aplicar descuento a pedido");
-        System.out.println("7. Salir");
+        System.out.println("7.  Resumen inventario");
+        System.out.println("8 eliminar producto ");
+        System.out.println("9 salir ");
         System.out.print("Seleccione una opción: ");
     }
 
